@@ -2,7 +2,7 @@
 
 ### Участники бригады:
 
-| Surname | Name   | Github     |
+| **Surname** | **Name**   | **Github**     |
 |---------|--------|------------|
 | Pautova | Julia  | pautowa    |
 | Roslova | Larisa | LRoslova   |
