@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controllers.page2Controller">
+   <children>
+      <Button fx:id="butt_nextScene" layoutX="586.0" layoutY="361.0" mnemonicParsing="false" onAction="#nextScene" prefHeight="24.0" prefWidth="100.0" text="Далее" />
+      <Button fx:id="butt_backScene" layoutX="14.0" layoutY="361.0" mnemonicParsing="false" onAction="#backScene" prefHeight="24.0" prefWidth="100.0" text="Назад" />
+      <Text layoutX="241.0" layoutY="378.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Окно 2. Ввод основных данных" wrappingWidth="218.7294921875" />
+      <TableView fx:id="table" layoutX="373.0" layoutY="37.0" prefHeight="344.0" prefWidth="381.0" AnchorPane.bottomAnchor="47.0" AnchorPane.leftAnchor="305.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="9.0">
+        <columns>
+          <TableColumn fx:id="col_fNode" maxWidth="200.0" prefWidth="110.0" text="Первая" />
+          <TableColumn fx:id="col_sNode" maxWidth="200.0" prefWidth="110.0" text="Вторая" />
+            <TableColumn fx:id="col_price" maxWidth="200.0" prefWidth="110.0" text="Цена" />
+            <TableColumn prefWidth="75.0" />
+        </columns>
+      </TableView>
+      <TextField fx:id="fie_fNode" layoutX="57.0" layoutY="95.0" promptText="Первая вершина" />
+      <TextField fx:id="fie_sNode" layoutX="57.0" layoutY="126.0" promptText="Вторая вершина" />
+      <TextField fx:id="fie_price" layoutX="57.0" layoutY="157.0" promptText="Стоймость перехода" />
+      <CheckBox fx:id="che_randomNode" layoutX="30.0" layoutY="236.0" mnemonicParsing="false" onAction="#selectRandomNode" selected="true" text="Начать с произвольной вершины." />
+      <CheckBox fx:id="che_startNode" layoutX="30.0" layoutY="270.0" mnemonicParsing="false" onAction="#selectStartNode" text="Указать стартовую вершину:" />
+      <TextField fx:id="fie_forNode" disable="true" layoutX="30.0" layoutY="301.0" />
+      <Text layoutX="30.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Введите начальные данные:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Button fx:id="butt_addNode" layoutX="101.0" layoutY="194.0" mnemonicParsing="false" onAction="#addNode" text="Добавить" />
+      <Button fx:id="butt_loadFromFile" layoutX="57.0" layoutY="47.0" mnemonicParsing="false" onAction="#loadFromFile" prefWidth="171.0" text="Загрузить из файла" />
+   </children>
+</AnchorPane>
