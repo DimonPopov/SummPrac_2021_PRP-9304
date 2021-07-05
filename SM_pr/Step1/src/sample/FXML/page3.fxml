@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="400.0" maxWidth="700.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controllers.page3Controller">
+   <children>
+      <Button fx:id="butt_stepForward" layoutX="479.0" layoutY="264.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="100.0" text="Вперед" AnchorPane.bottomAnchor="113.0" AnchorPane.rightAnchor="123.0" />
+      <Button fx:id="butt_finish" layoutX="479.0" layoutY="330.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="210.0" text="До конца" AnchorPane.bottomAnchor="80.0" AnchorPane.rightAnchor="14.0" />
+      <Button fx:id="butt_stepBack" layoutX="585.0" layoutY="264.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="100.0" text="Назад" AnchorPane.bottomAnchor="113.0" AnchorPane.rightAnchor="14.0" />
+      <Button fx:id="butt_refresh" layoutX="476.0" layoutY="326.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="210.0" text="К изначальному состоянию" AnchorPane.bottomAnchor="47.0" AnchorPane.rightAnchor="14.0" />
+      <TableView fx:id="logTable" layoutX="476.0" layoutY="14.0" prefHeight="241.0" prefWidth="210.0" AnchorPane.bottomAnchor="145.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+        <columns>
+          <TableColumn fx:id="col_first" prefWidth="70.0" text="Первая" />
+          <TableColumn fx:id="col_second" prefWidth="70.0" text="Вторая" />
+            <TableColumn fx:id="col_price" prefWidth="70.0" text="Цена" />
+        </columns>
+      </TableView>
+      <ScrollPane layoutX="14.0" layoutY="14.0" prefHeight="376.0" prefWidth="452.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="234.0" AnchorPane.topAnchor="14.0">
+         <content>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Окно 3. Визуализация" />
+         </content>
+      </ScrollPane>
+      <Button fx:id="butt_newData" layoutX="480.0" layoutY="362.0" mnemonicParsing="false" onAction="#backScene" prefHeight="24.0" prefWidth="210.0" text="Ввести новые данные" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+   </children>
+</AnchorPane>
