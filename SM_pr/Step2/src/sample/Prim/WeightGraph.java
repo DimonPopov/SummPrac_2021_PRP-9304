@@ -4,7 +4,7 @@ import java.util.*;
 
 
 
-public class WeightGraph {
+public class WeightGraph{
 
     public static class Edge {
         private int a;      // Номер первой вершины
@@ -104,8 +104,8 @@ public class WeightGraph {
         }
     }
 
-    public List<Integer> getResult() {
-        List<Integer> result = new ArrayList<Integer>();
+    public List<String> getResult() {
+        List<String> result = new ArrayList<>();
         for (int i = 0; i < graph.length; i++) {
             // Вынимаем список, связанный с каждой стороны, чтобы пройти
             List<Edge> edges = graph[i];
@@ -117,9 +117,9 @@ public class WeightGraph {
                 int a = (Integer) edge.getV();
                 int b = (Integer) edge.getW();
                 //System.out.println(String.format("%d - %d : %d", a, b, weightr));
-                result.add(weightr);
-                result.add(a);
-                result.add(b);
+                result.add(Integer.toString(weightr));
+                result.add(Integer.toString(a));
+                result.add(Integer.toString(b));
             }
         }
         return result;

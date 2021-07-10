@@ -5,7 +5,7 @@ import edu.uci.ics.jung.graph.Graph;
 import java.io.File;
 import java.util.*;
 
-public class LazyPrimMST {
+public class LazyPrimMST{
     private VisualGraph visGraph;
     private WeightGraph graph;                          // ссылка на рисунок
     private PriorityQueue<WeightGraph.Edge> minHeap;    // минимальная куча
@@ -46,6 +46,7 @@ public class LazyPrimMST {
                 visit(minEdge.getW());
             }
         }
+        visGraph.clean();
     }
 
     public List<WeightGraph.Edge> getMst() {

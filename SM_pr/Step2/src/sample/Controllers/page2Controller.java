@@ -53,8 +53,8 @@ public class page2Controller extends mainController{
                            Integer.parseInt(layot.getFriend()),
                            Integer.parseInt(layot.getPrice()));
         }
-        List<Integer> valueof = graph2.getResult();
-        VisualGraph graph = new VisualGraph((ArrayList<Integer>) valueof);
+        List<String> valueof = graph2.getResult();
+        VisualGraph graph = new VisualGraph((ArrayList<String>) valueof);
         Main.png = new ArrayList<>();
         Main.png.add(graph.visualizationGraph());
         LazyPrimMST lazyPrimMST;

@@ -4,7 +4,6 @@ import edu.uci.ics.jung.algorithms.layout.*;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.SparseMultigraph;
 import edu.uci.ics.jung.visualization.VisualizationImageServer;
-import edu.uci.ics.jung.visualization.VisualizationViewer;
 import edu.uci.ics.jung.visualization.decorators.EdgeShape;
 import edu.uci.ics.jung.visualization.decorators.ToStringLabeller;
 import edu.uci.ics.jung.visualization.renderers.Renderer;
@@ -19,105 +18,84 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
-
 public class VisualGraph {
-    public static ArrayList<Integer> edges = new ArrayList<>();
-    public static ArrayList<Pair<Integer,Integer>> vertices = new ArrayList<>();
-    public static ArrayList<Integer> ostovVertices = new ArrayList<>();
-    public static ArrayList<Integer> ostovEdges = new ArrayList<>();
-    private final Graph<Integer, Integer> graph;
-    private ISOMLayout<Integer, Integer> layout;
-    private VisualizationViewer<Integer,Integer> vv;
-    private VisualizationImageServer<Integer, Integer> vis;
+    private final Graph<String, Integer> graph;
+    private final ISOMLayout<String, Integer> layout;
+    private final VisualizationImageServer<String, Integer> vis;
     private BufferedImage image;
     private int iter = 0;
 
-    public VisualGraph(ArrayList<Integer> input) {
-        this.graph = new SparseMultigraph<Integer, Integer>();
+    public VisualGraph(ArrayList<String> input) { //вес,вершина1,вершина2,...
+        this.graph = new SparseMultigraph<String, Integer>();
         int SIZE = input.size();
         int edgeId = 0;
-        Integer i = 0;
+        int i = 0;
         while (i<SIZE) {
             graph.addEdge((Integer) edgeId, input.get(i+1),input.get(i+2));
             edges.add(input.get(i));
-            vertices.add(new Pair<Integer,Integer>(input.get(i+1),input.get(i+2)));
+            vertices.add(new Pair<String,String>(input.get(i+1),input.get(i+2)));
             i += 3;
             edgeId += 1;
         }
-
-        this.layout = new ISOMLayout<Integer,Integer>(this.graph);
+        this.layout = new ISOMLayout<String,Integer>(this.graph);
         layout.setSize(new Dimension(500,500));
-        this.vv = new VisualizationViewer<>(layout);                    // !!!
-        vv.setPreferredSize(new Dimension(500,500));
-        this.vis = new VisualizationImageServer<Integer, Integer>(vv.getGraphLayout(),vv.getGraphLayout().getSize());
+        this.vis = new VisualizationImageServer<String, Integer>(layout,new Dimension(500,500));
         vis.setBackground(Color.WHITE); //цвет фона
         vis.getRenderContext().setEdgeLabelTransformer(new Transformer<Integer, String>() { //Преобразование id ребра на его вес при рисовании
             public String transform(Integer input) {
-                return Integer.toString(VisualGraph.edges.get(input));
+                return VisualGraph.edges.get(input);
             }
         });
-        vis.getRenderContext().setEdgeShapeTransformer(new EdgeShape.Line<Integer, Integer>());
-        vis.getRenderContext().setVertexLabelTransformer(new ToStringLabeller<Integer>());
+        vis.getRenderContext().setEdgeShapeTransformer(new EdgeShape.Line<String, Integer>());
+        vis.getRenderContext().setVertexLabelTransformer(new ToStringLabeller<String>());
         vis.getRenderer().getVertexLabelRenderer().setPosition(Renderer.VertexLabel.Position.CNTR);
 
     }
 
     public File visualizationGraph(){
-        vis.getRenderContext().setEdgeDrawPaintTransformer(new Transformer<Integer, Paint>() { //Окрашивание ребер в нужный цвет
-            @Override
-            public Paint transform(Integer integer) {
-                int SIZE = VisualGraph.ostovEdges.size();
-                for(int i=0; i<SIZE;i++){
-                    if(integer == VisualGraph.ostovEdges.get(i)){
-                        return Color.RED;
-                    }
-                }
-                return Color.BLACK;
-            }
-        });
-
-        vis.getRenderContext().setVertexFillPaintTransformer(this.vertexPaint());
-        this.image = (BufferedImage) vis.getImage(
-                new Point2D.Double(vv.getGraphLayout().getSize().getWidth() / 2,
-                        vv.getGraphLayout().getSize().getHeight() / 2),
-                new Dimension(vv.getGraphLayout().getSize()));
-
+        vis.getRenderContext().setEdgeDrawPaintTransformer(this.edgePaint());
+        vis.getRenderContext().setVertexFillPaintTransformer(vertexPaint());
+        this.image = (BufferedImage) vis.getImage(new Point2D.Double(500 / 2,500 / 2), new Dimension(500,500));
         File outputFile = new File("./src/sample/Result/" + Integer.toString(iter)+".png");
-        iter += 1;
-
         try {
             ImageIO.write(image, "png", outputFile);
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
+        iter += 1;
         return outputFile;
     }
 
-
-    public int getImageCounter(){
-        return this.iter;
+    public void clean(){
+        edges.clear();
+        vertices.clear();
+        ostovEdges.clear();
+        ostovVertices.clear();
     }
 
+
     public void setOstov(int weight, int v1, int v2){
-        ostovVertices.add(v1);
-        ostovVertices.add(v2);
-        int curV1, curV2;
+        String V1 = Integer.toString(v1);
+        String V2 = Integer.toString(v2);
+        ostovVertices.add(V1);
+        ostovVertices.add(V2);
+        String curV1, curV2;
         for(int i = 0; i<edges.size();i++){
             curV1 = vertices.get(i).getKey();
             curV2 = vertices.get(i).getValue();
-            if(edges.get(i) == weight && (curV1 == v1 | curV1 == v2) && (curV2 == v2 | curV2 == v1)){
+            if(edges.get(i).equals(Integer.toString(weight)) && (curV1.equals(V1) | curV1.equals(V2)) && (curV2.equals(V2) | curV2.equals(V1))){
                 ostovEdges.add(i);
             }
         }
     }
 
-    private Transformer<Integer,Paint> vertexPaint() {
-        return new Transformer<Integer, Paint>() { //окрашивание вершин в разные цвета в соотв. с их именами
-            public Paint transform(Integer i) {
+    private Transformer<String,Paint> vertexPaint() { //окрашивание вершин в разные цвета в соотв. с их именами
+        return new Transformer<String, Paint>() {
+            @Override
+            public Paint transform(String str) {
                 int SIZE = VisualGraph.ostovVertices.size();
                 for (int j = 0; j < SIZE; j++) {
-                    if (i.equals(VisualGraph.ostovVertices.get(j))) {
+                    if (str.equals(VisualGraph.ostovVertices.get(j))) {
                         return Color.YELLOW;
                     }
                 }
@@ -125,4 +103,24 @@ public class VisualGraph {
             }
         };
     }
+
+    private Transformer<Integer,Paint> edgePaint() { //Окрашивание ребер в нужный цвет
+        return new Transformer<Integer, Paint>() {
+            @Override
+            public Paint transform(Integer integer) {
+                int SIZE = VisualGraph.ostovEdges.size();
+                for (int i = 0; i < SIZE; i++) {
+                    if (integer == VisualGraph.ostovEdges.get(i)) {
+                        return Color.RED;
+                    }
+                }
+                return Color.BLACK;
+            }
+        };
+    }
+
+    private static ArrayList<String> edges = new ArrayList<>();
+    private static ArrayList<Pair<String,String>> vertices = new ArrayList<>();
+    private static ArrayList<String> ostovVertices = new ArrayList<>();
+    private static ArrayList<Integer> ostovEdges = new ArrayList<>();
 }
