@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Text layoutX="14.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Алгоритм Прима - алгоритм построеия минимального остовного дерева взвешенного связного неориентированного графа. Построение начинается с дерева, включающего в себя одну(произвольную) вершину. В течение работы алгоритма дерево разрастается, пока не охватит все вершины исходного графа. На каждом шаге алгоритма к текущему дереву присоединяется самое легкое из ребер, соединяющих вершину из построенного дерева, и вершину не из дерева. Асимптотика алгоритма зависит от способа хранения графа и способа хранения вершин, не входящих в дерево." wrappingWidth="373.7294921875" />
+   </children>
+</AnchorPane>
