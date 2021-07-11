@@ -18,14 +18,18 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+
+
 public class VisualGraph {
+
     private final Graph<String, Integer> graph;
     private final ISOMLayout<String, Integer> layout;
     private final VisualizationImageServer<String, Integer> vis;
     private BufferedImage image;
     private int iter = 0;
 
-    public VisualGraph(ArrayList<String> input) { //вес,вершина1,вершина2,...
+    public VisualGraph(ArrayList<String> input) {               //вес,вершина1,вершина2,...
+
         this.graph = new SparseMultigraph<String, Integer>();
         int SIZE = input.size();
         int edgeId = 0;
@@ -37,6 +41,7 @@ public class VisualGraph {
             i += 3;
             edgeId += 1;
         }
+        
         this.layout = new ISOMLayout<String,Integer>(this.graph);
         layout.setSize(new Dimension(500,500));
         this.vis = new VisualizationImageServer<String, Integer>(layout,new Dimension(500,500));
