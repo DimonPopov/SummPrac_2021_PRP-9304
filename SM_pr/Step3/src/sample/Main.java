@@ -47,7 +47,6 @@ public class Main extends Application {
     public static Collection getLog(){ return log; }
 
     public static void main(String[] args) {
-
         for(String str : args){
             if(str.equals("CLI")){
                 BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -72,7 +71,6 @@ public class Main extends Application {
                 launch(args);
             }
         }
-
-
+        launch(args);
     }
 }

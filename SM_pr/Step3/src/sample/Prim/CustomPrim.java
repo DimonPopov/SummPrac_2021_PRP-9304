@@ -52,8 +52,9 @@ public class CustomPrim implements IAlg{
         }
     }
 
-    public
-    ArrayList<sample.Prim.CustomGraph.Edge> getMst(){
+    public String getStartVertex(){return start;}
+
+    public ArrayList<sample.Prim.CustomGraph.Edge> getMst(){
         return mst;
     }
 
