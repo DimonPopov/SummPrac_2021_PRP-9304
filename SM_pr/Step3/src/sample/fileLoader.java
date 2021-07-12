@@ -53,8 +53,6 @@ public class fileLoader {
                 if(words.length != 3){
                     continue;
                 }
-                Integer.parseInt(words[0]);
-                Integer.parseInt(words[1]);
                 Integer.parseInt(words[2]);
                 this.data.add(words);
             }

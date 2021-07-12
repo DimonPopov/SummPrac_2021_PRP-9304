@@ -40,7 +40,7 @@ public class CustomGraph {
     private ArrayList<ArrayList<Edge>> graph;   // Представление нашего графа.
     private Map<String, Integer> position;      // Позиция в листе.
     private final boolean directed;             // Ориентированный ли граф.
-    private ArrayList<String> forVisu;
+    private ArrayList<String> forVisu;          // Представление графа как ориентированного.
 
     public CustomGraph(boolean directed){
         this.directed = directed;
@@ -73,7 +73,6 @@ public class CustomGraph {
         if(position.containsKey(w)){
             Edge newEdge = new Edge(w, v, weight);
             graph.get(position.get(w)).add(newEdge);
-            //forVisu.add(new String(weight.toString() + " " + w.toString() + " " + v.toString()));
         }else{
             graph.add(new ArrayList<Edge>());
             int index = graph.size() - 1;

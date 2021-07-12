@@ -27,7 +27,7 @@ public class CustomPrim implements IAlg{
 
     private void createMinHeap(){
         minHeap = new PriorityQueue<>((e1 ,e2)->{
-            return (int)e1.getWeight() - (int)e2.getWeight();
+            return Integer.parseInt(e1.getWeight().toString()) - Integer.parseInt(e2.getWeight().toString());
         });
         marked = new ArrayList<>();
         for(int i = 0; i < graph.getGraph().size(); ++i){
@@ -52,9 +52,8 @@ public class CustomPrim implements IAlg{
         }
     }
 
-    public String getStartVertex(){return start;}
-
-    public ArrayList<sample.Prim.CustomGraph.Edge> getMst(){
+    public
+    ArrayList<sample.Prim.CustomGraph.Edge> getMst(){
         return mst;
     }
 
@@ -64,7 +63,7 @@ public class CustomPrim implements IAlg{
         logs.add("Start: " + start);
         while (!minHeap.isEmpty()) {
             CustomGraph.Edge minEdge = minHeap.poll();
-            if (marked.get(graph.getPosition().get(minEdge.getA())) && marked.get(graph.getPosition().get(minEdge.getB()))){
+            if (marked.get(graph.getPosition().get(minEdge.getA().toString())) && marked.get(graph.getPosition().get(minEdge.getB().toString()))){
                 // Ели посещены обе вершины.
                 continue;
             }
@@ -72,7 +71,8 @@ public class CustomPrim implements IAlg{
             mst.add(minEdge);
             result.add(minEdge.getWeight().toString() + " " + minEdge.getA().toString() + " " + minEdge.getB().toString());
 
-            if (!marked.get(graph.getPosition().get(minEdge.getA()))) {
+            if (!marked.get(graph.getPosition().get(minEdge.getA().toString()))) {
+                System.out.println("+++");
                 visit(minEdge.getA().toString());
             } else {
                 visit(minEdge.getB().toString());
